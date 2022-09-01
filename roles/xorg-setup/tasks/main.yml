@@ -1,0 +1,41 @@
+---
+# tasks file for common
+- name: Install xorg with pacman
+  community.general.pacman:
+    name: "{{ packages }}" 
+    state: present
+
+- name: Copy .xinitrc
+  ansible.builtin.copy:
+    src: files/xinitrc
+    dest: "{{home_dir}}.xinitrc"
+    owner: "{{user_name}}"
+    mode: '777'
+
+- name: Copy 00-set-resolution
+  ansible.builtin.copy:
+    src: files/00-set-resolution
+    dest: /etc/X11/xinit/xinitrc.d/00-set-resolution
+    owner: root
+    mode: '777'
+
+- name: Copy wallpaper01.jpg
+  ansible.builtin.copy:
+    src: files/wallpaper01.jpg
+    dest: "{{home_dir}}Pictures/Wallpaper/wallpaper01.jpg"
+    owner: "{{user_name}}"
+    mode: '777'
+
+- name: Copy 01-set-bg
+  ansible.builtin.copy:
+    src: files/01-set-bg
+    dest: /etc/X11/xinit/xinitrc.d/01-set-bg
+    owner: root
+    mode: '777'
+
+- name: Copy 02-disable-sleep
+  ansible.builtin.copy:
+    src: files/02-disable-sleep
+    dest: /etc/X11/xinit/xinitrc.d/02-disable-sleep
+    owner: root
+    mode: '777'

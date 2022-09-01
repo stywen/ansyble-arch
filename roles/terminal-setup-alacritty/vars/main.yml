@@ -1,0 +1,6 @@
+---
+# vars file for common
+packages:
+  - alacritty
+  - neofetch 
+  - zsh

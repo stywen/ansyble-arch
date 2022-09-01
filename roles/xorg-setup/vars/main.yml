@@ -1,0 +1,5 @@
+---
+# vars file for common
+packages:
+  - xorg 
+  - xorg-xinit 

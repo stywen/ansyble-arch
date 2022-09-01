@@ -1,0 +1,14 @@
+---
+# tasks file for essential-settup
+- name: Update the system = "pacman -Syu"
+  community.general.pacman:
+    update_cache: yes
+    upgrade: yes
+
+- name: set hostname to "suecyde"
+  hostname:
+    name: suecyde
+
+- name: Set timezone to Europe/Vienna
+  community.general.timezone:
+    name: Europe/Vienna

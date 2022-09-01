@@ -1,0 +1,20 @@
+---
+# tasks file for common
+- name: Install packages with pacman
+  community.general.pacman:
+    name: "{{ packages }}" 
+    state: present
+
+- name: Create directory ".config/i3" if it does not exist
+  ansible.builtin.file:
+    path: "{{home_dir}}.config/i3"
+    state: directory
+    mode: '0755'
+    owner: "{{user_name}}"
+
+- name: Copy i3-config
+  ansible.builtin.copy:
+    src: files/i3.config
+    dest: "{{home_dir}}.config/i3/config"
+    owner: "{{user_name}}"
+    mode: '777'

@@ -1,0 +1,12 @@
+---
+# vars file for common
+packages:
+  - qemu 
+  - virt-manager 
+  - virt-viewer 
+  - dnsmasq 
+  - vde2 
+  - bridge-utils 
+  - openbsd-netcat
+  - libguestfs
+  - dmidecode

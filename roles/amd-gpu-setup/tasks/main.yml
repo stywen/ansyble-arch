@@ -1,0 +1,26 @@
+---
+# tasks file for common
+- name: Install packages with pacman
+  community.general.pacman:
+    name: "{{ packages }}" 
+    state: present
+
+- name: Install amd-drivers
+  community.general.pacman:
+    name: "{{ driver_packages }}"
+    state: present
+
+- name: Copy 20-amd-gpu.conf
+  ansible.builtin.copy:
+    src: files/20-amd-gpu.conf
+    dest: /etc/X11/xorg.conf.d/20-amd-gpu.conf
+    owner: root
+    mode: '777'
+
+- lineinfile:
+    path: /etc/environment
+    line: 'RADV_PERFTEST=aco'
+
+- lineinfile:
+    path: /etc/security/limits.conf
+    line: '{{user_name}} hard nofile 524288'

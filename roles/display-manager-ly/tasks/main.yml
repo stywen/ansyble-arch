@@ -1,0 +1,17 @@
+---
+# tasks file for common
+- name: check if ly is installed
+  aur: 
+   name="{{ aur_package }}" 
+   user="{{user_name}}"
+
+- name: Enable service ly and ensure it is not masked
+  ansible.builtin.systemd:
+    name: ly
+    enabled: yes
+    masked: no
+
+- name: Make sure "ly" service unit is running
+  ansible.builtin.systemd:
+    state: restarted
+    name: ly

@@ -1,0 +1,8 @@
+# if systems need specific variables, put them here
+user_name:
+   stywen
+
+home_dir:
+   /home/stywen/
+
+

@@ -1,0 +1,6 @@
+---
+# tasks file for common
+- name: Install packages with pacman
+  community.general.pacman:
+    name: "{{ packages }}" 
+    state: present

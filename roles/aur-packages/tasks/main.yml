@@ -1,0 +1,5 @@
+---
+# tasks file for common
+- aur: 
+   name="{{aur_packages}}" 
+   user="{{user_name}}"

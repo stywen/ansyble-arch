@@ -1,0 +1,23 @@
+# This is your main playbook you will run with:
+# ansible-playbook site.yml
+# You can kick off everything from this playbook.
+# Or, you can create separate playbooks in this directory for specific orchestration events.
+
+---
+- name: apply common configuration to all nodes
+  hosts: suecyde
+  gather_facts: false
+  become: yes
+
+  roles:
+    - essential-setup
+    - directory-setup
+    - pacman-packages
+    - aur-packages
+    - display-manager-ly
+    - xorg-setup
+    - i3-setup
+    - amd-gpu-setup
+    - terminal-setup-alacritty
+    - qemu-setup
+

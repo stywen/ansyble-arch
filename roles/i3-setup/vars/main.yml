@@ -1,0 +1,4 @@
+---
+# vars file for common
+packages:
+  - i3-gaps

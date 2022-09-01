@@ -1,0 +1,71 @@
+---
+- name: Create directory "Documents" if it does not exist
+  ansible.builtin.file:
+    path: "{{ home_dir }}Documents"
+    state: directory
+    mode: '0755'
+    owner: '{{ user_name }}'
+    recurse: true
+
+- name: Create directory "Downloads" if it does not exist
+  ansible.builtin.file:
+    path: "{{home_dir}}Downloads"
+    state: directory
+    mode: '0755'
+    owner: "{{user_name}}"
+
+- name: Create directory "Scripts" if it does not exist
+  ansible.builtin.file:
+    path: "{{home_dir}}Scripts"
+    state: directory
+    mode: '0755'
+    owner: "{{user_name}}"
+
+- name: Create directory "Git" if it does not exist
+  ansible.builtin.file:
+    path: "{{home_dir}}Git"
+    state: directory
+    mode: '0755'
+    owner: "{{user_name}}"
+
+- name: Create directory "Pictures/Wallpaper" if it does not exist
+  ansible.builtin.file:
+    path: "{{home_dir}}Pictures/Wallpaper"
+    state: directory
+    mode: '0755'
+    owner: "{{user_name}}"
+
+- name: Create directory "Virtualization" if it does not exist
+  ansible.builtin.file:
+    path: /Virtualization/
+    state: directory
+    mode: '0755'
+    owner: "{{user_name}}"
+
+- name: Create directory "DISK" if it does not exist
+  ansible.builtin.file:
+    path: /Virtualization/DISK
+    state: directory
+    mode: '0755'
+    owner: "{{user_name}}"
+
+- name: Create directory "ISO" if it does not exist
+  ansible.builtin.file:
+    path: /Virtualization/ISO
+    state: directory
+    mode: '0755'
+    owner: "{{user_name}}"
+
+#- name: Create directory "alacritty" if it does not exist
+#  ansible.builtin.file:
+#    path: "{{home_dir}}.config/alacritty/"
+#    state: directory
+#    mode: '0755'
+#    owner: "{{user_name}}"
+
+#- name: Create directory ".config/i3" if it does not exist
+#  ansible.builtin.file:
+#    path: "{{home_dir}}.config/i3"
+#    state: directory
+#    mode: '0755'
+#    owner: "{{user_name}}"

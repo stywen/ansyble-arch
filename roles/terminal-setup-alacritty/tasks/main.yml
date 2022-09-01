@@ -65,11 +65,10 @@
     dest: "{{home_dir}}fonts/"
     depth: 1
 
-
-- name: Copy and Execute the script 
-  command: "sh /home/stywen/fonts/install.sh"
-
-
+- name: Change the working directory to somedir/ before executing the command
+  ansible.builtin.shell: "{{home_dir}}fonts/install.sh >> somelog.txt"
+  args:
+    chdir: "{{home_dir}}fonts/"
 
 - name: Copy zshrc
   ansible.builtin.copy:

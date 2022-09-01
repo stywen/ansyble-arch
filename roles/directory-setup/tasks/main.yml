@@ -65,17 +65,3 @@
     recurse: yes
     mode: '0755'
     owner: "{{user_name}}"
-
-#- name: Create directory "alacritty" if it does not exist
-#  ansible.builtin.file:
-#    path: "{{home_dir}}.config/alacritty/"
-#    state: directory
-#    mode: '0755'
-#    owner: "{{user_name}}"
-
-#- name: Create directory ".config/i3" if it does not exist
-#  ansible.builtin.file:
-#    path: "{{home_dir}}.config/i3"
-#    state: directory
-#    mode: '0755'
-#    owner: "{{user_name}}"

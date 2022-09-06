@@ -3,3 +3,4 @@
 aur_packages:
   - ly
   - brave-bin
+  - polybar

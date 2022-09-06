@@ -1,5 +1,10 @@
 ---
 # tasks file for common
+
+- aur: 
+   name="{{aur_packages}}" 
+   user="{{user_name}}"
+   
 - name: Install polybar
   become_user: "{{user_name}}"
   git:

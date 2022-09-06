@@ -20,4 +20,4 @@
     - amd-gpu-setup
     - terminal-setup-alacritty
     - qemu-setup
-
+    - polybar

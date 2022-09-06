@@ -1,0 +1,33 @@
+---
+# tasks file for common
+- name: Install polybar
+  become_user: "{{user_name}}"
+  git:
+    repo: https://aur.archlinux.org/polybar.git
+    dest: "{{home_dir}}Git/polybar"
+    depth: 1
+
+- name: Create directory ".confi/polybar" if it does not exist
+  ansible.builtin.file:
+    path: "{{home_dir}}.config/polybar"
+    state: directory
+    mode: '0755'
+    owner: "{{user_name}}"
+
+- name: Copy the config
+  ansible.builtin.copy:
+    src: files/conf.ini
+    dest: "{{home_dir}}.config/polybar/config"
+    owner: "{{user_name}}"
+    mode: '777'
+
+- name: Copy the run script
+  ansible.builtin.copy:
+    src: files/polybarlaunch.sh
+    dest: "{{home_dir}}.config/polybar/polybarlaunch.sh"
+    owner: "{{user_name}}"
+    mode: '777'
+
+#- name: Execute the command in remote shell; stdout goes to the specified file on the remote
+#  become_user: "{{user_name}}"
+#  ansible.builtin.shell: "cd {{home_dir}}Git/polybar && yes | makepkg -si"

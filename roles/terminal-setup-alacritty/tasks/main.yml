@@ -58,17 +58,22 @@
     dest: "{{home_dir}}.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
     depth: 1
 
-- name: download font
-  become_user: "{{user_name}}"
-  git:
-    repo: https://github.com/powerline/fonts.git
-    dest: "{{home_dir}}fonts/"
-    depth: 1
+- name: Create directory "/.local/share/fonts" if it does not exist
+  ansible.builtin.file:
+    path: "{{home_dir}}.local/share/fonts/"
+    state: directory
+    mode: '0755'
+    owner: "{{user_name}}"
 
-- name: Change the working directory to somedir/ before executing the command
-  ansible.builtin.shell: "{{home_dir}}fonts/install.sh >> somelog.txt"
-  args:
-    chdir: "{{home_dir}}fonts/"
+- name: Copy FuraMono-Regular-Powerline.otf
+  ansible.builtin.copy:
+    src: files/FuraMono-Regular-Powerline.otf
+    dest: "{{home_dir}}.local/share/fonts/FuraMono-Regular-Powerline.otf"
+    owner: "{{user_name}}"
+    mode: '777'
+
+- name: rebuild font cach
+  ansible.builtin.shell: fc-cache -f -v
 
 - name: Copy zshrc
   ansible.builtin.copy:

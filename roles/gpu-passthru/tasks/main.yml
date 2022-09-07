@@ -1,0 +1,75 @@
+---
+# tasks file for common
+- name: modify grub for gpu passthru
+  ansible.builtin.replace:
+    path: /etc/default/grub
+    regexp: '^GRUB_CMDLINE_LINUX_DEFAULT=".*"'
+    replace: GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet amd_iommu=on vfio-pci.ids={{pci_id_gpu}},{{pci_id_aux}}"
+
+- name: Run command "grub-mkconfig -o /boot/grub/grub.cfg"
+  ansible.builtin.command: grub-mkconfig -o /boot/grub/grub.cfg
+
+- name: create /etc/modprobe.d/vfio.conf
+  ansible.builtin.file:
+    path: /etc/modprobe.d/vfio.conf
+    state: touch
+    owner: root
+  
+- name: modify vfio config 1/2
+  ansible.builtin.lineinfile:
+    path: /etc/modprobe.d/vfio.conf
+    line: "options vfio-pci ids={{pci_id_gpu}},{{pci_id_aux}}"
+
+- name: modify vfio config 2/2
+  ansible.builtin.lineinfile:
+    path: /etc/modprobe.d/vfio.conf
+    line: "softdep nvidia pre: vfio-pci"
+
+- name: create /etc/modprobe.d/blacklist.conf
+  ansible.builtin.file:
+    path: /etc/modprobe.d/blacklist.conf
+    state: touch
+    owner: root
+
+- name: modify blacklist config 1/2
+  ansible.builtin.lineinfile:
+    path: /etc/modprobe.d/blacklist.conf
+    line: "blacklist nouveau"
+
+#- name: modify blacklist config 2/2
+#  ansible.builtin.lineinfile:
+#    path: /etc/modprobe.d/blacklist.conf
+#    line: "options nouveau modeset=0"
+
+
+
+
+- name: modify grub for gpu passthru
+  ansible.builtin.replace:
+    path: /etc/mkinitcpio.conf
+    regexp: '^MODULES=(.*)'
+    replace: "MODULES=(vfio_pci vfio vfio_iommu_type1 vfio_virqfd)"
+
+- name: Run command "mkinitcpio -p linux"
+  ansible.builtin.command: mkinitcpio -p linux
+
+# for debugging
+#- name: show if grub is set up correctly
+#  command: cat /etc/default/grub 
+#  register: cat
+#- debug: var=cat.stdout_lines
+
+#- name: show if vfio.conf is set up correctly
+#  command: cat /etc/modprobe.d/vfio.conf
+#  register: cat
+#- debug: var=cat.stdout_lines
+
+- name: show if vfio.conf is set up correctly
+  command: "lspci -nnk -d {{pci_id_gpu}}"
+  register: lspci
+- debug: var=lspci.stdout_lines
+
+- name: show if vfio.conf is set up correctly
+  command: "lspci -nnk -d {{pci_id_aux}}"
+  register: lspci
+- debug: var=lspci.stdout_lines

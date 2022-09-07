@@ -1,4 +1,4 @@
 ---
 # vars file for common
-aur_packages:
-  - polybar
+packages:
+  - lm_sensors

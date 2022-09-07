@@ -1,0 +1,6 @@
+---
+# vars file for common
+pci_id_gpu:
+  10de:2504 
+pci_id_aux:
+  10de:228e 

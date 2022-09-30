@@ -23,3 +23,6 @@ packages:
   - wget
   - curl
   - unzip
+  - maim
+  - xclip
+  - firefox

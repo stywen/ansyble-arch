@@ -12,3 +12,11 @@
 - name: Set timezone to Europe/Vienna
   community.general.timezone:
     name: Europe/Vienna
+    
+    
+- name: Copy sudoers file
+  ansible.builtin.copy:
+    src: templates/sudoers-template.conf.j2
+    dest: "/etc/sudoers"
+    owner: root
+    mode: '600'

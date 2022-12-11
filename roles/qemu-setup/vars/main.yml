@@ -10,3 +10,5 @@ packages:
   - openbsd-netcat
   - libguestfs
   - dmidecode
+  - edk2-ovmf
+  - swtpm

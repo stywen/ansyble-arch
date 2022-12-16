@@ -1,6 +1,6 @@
 ---
 # vars file for common
 aur_packages:
-  - ly
-  - brave-bin
+  #- ly
+  #- brave-bin
   - polybar
